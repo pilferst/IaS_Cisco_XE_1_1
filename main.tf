@@ -9,14 +9,33 @@ module "ethernet_interface" {
 module "loopback_interface" {
   source = "./modules/loopback_interface"
   routers     = var.routers
-   
 }
 
 
 module "ospf" {
   source = "./modules/ospf"
-  routers     = var.routers 
+  routers = var.routers
+  ospf = var.ospf
+
+  depends_on = [
+    module.ethernet_interface,
+    module.loopback_interface
+  ] 
 }
+
+module "bgp" {
+  source = "./modules/bgp"
+  routers     = var.routers
+  bgp = var.bgp
+
+  depends_on = [
+    module.ethernet_interface,
+    module.loopback_interface,
+    module.ospf
+    
+  ] 
+}
+
 
 /*resource "iosxe_interface_ethernet" "r1_ge2" {
   for_each = var.routers

@@ -12,9 +12,13 @@ variable "ospf" {
      area = number
   })  
 }
-variable "router1_host" {
-  type = string
+
+variable "bgp" {
+  type = object({
+     as = number
+  })  
 }
+
 
 variable "routers" {
   description = "List of all routers"

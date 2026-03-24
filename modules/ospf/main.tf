@@ -10,12 +10,12 @@ resource "iosxe_ospf" "r_ospf" {
     {
       ip       = each.value.g2_ip_address     # LAN внутри роутера (из вашего предыдущего примера)
       wildcard = "0.0.0.0"
-      area     = "0"
+      area     = var.ospf.area
     },
     {
       ip       = each.value.loopback0_ip_address         # пример второго маршрута (например, другая подсеть)
       wildcard = "0.0.0.0"
-      area     = "0"
+      area     = var.ospf.area
     }
   ]
 }

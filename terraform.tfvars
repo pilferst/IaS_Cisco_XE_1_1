@@ -1,12 +1,15 @@
 
 router_username  = "admin"
-router_password  = "1"
+router_password  = "12345As12345As"
 
 ospf ={
     area = 0
 }
-router1_host      = "10.250.6.10"
 
+
+bgp ={
+    as = 65000
+}
 
 routers = {
   r10 = {

@@ -2,12 +2,11 @@ variable "routers" {
   description = "Map of routers"
   type = map(object({
     loopback0_ip_address = string
-    g2_ip_address = string
   }))
 }
 
-variable "ospf" {
+variable "bgp" {
   type = object({
-     area = number
+     as = number
   })  
 }

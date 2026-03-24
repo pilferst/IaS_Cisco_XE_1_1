@@ -1,4 +1,24 @@
-resource "iosxe_interface_ethernet" "r1_ge2" {
+module "ethernet_interface" {
+  source = "./modules/ethernet_interface"
+
+  routers     = var.routers
+  description = "LAN inside - Router - Terraform"
+}
+
+
+module "loopback_interface" {
+  source = "./modules/loopback_interface"
+  routers     = var.routers
+   
+}
+
+
+module "ospf" {
+  source = "./modules/ospf"
+  routers     = var.routers 
+}
+
+/*resource "iosxe_interface_ethernet" "r1_ge2" {
   for_each = var.routers
   device = each.key
   type                = "GigabitEthernet"
@@ -9,9 +29,9 @@ resource "iosxe_interface_ethernet" "r1_ge2" {
   ipv4_address_mask   = each.value.g2_mask
   ip_nat_inside       = false
 }
+*/
 
-
-
+/*
 resource "iosxe_interface_loopback" "r1_loopback0" {
   for_each = var.routers
   device = each.key
@@ -21,7 +41,10 @@ resource "iosxe_interface_loopback" "r1_loopback0" {
   ipv4_address        = each.value.loopback0_ip_address
   ipv4_address_mask   = each.value.loopback0_mask
 }
+*/
 
+
+/*
 resource "iosxe_interface_loopback" "r1_loopback1" {
   for_each = var.routers
   device = each.key
@@ -31,10 +54,12 @@ resource "iosxe_interface_loopback" "r1_loopback1" {
   ipv4_address        = each.value.loopback1_ip_address
   ipv4_address_mask   = each.value.loopback1_mask
 }
+*/
 
 
 
 
+/*
 resource "iosxe_ospf" "r_ospf" {
   for_each = var.routers
   device = each.key
@@ -43,7 +68,6 @@ resource "iosxe_ospf" "r_ospf" {
   passive_interface_default = false
   default_information_originate = false
   shutdown = false
-
   networks = [
     {
       ip       = each.value.g2_ip_address     # LAN внутри роутера (из вашего предыдущего примера)
@@ -57,9 +81,7 @@ resource "iosxe_ospf" "r_ospf" {
     }
   ]
 }
-
-
-
+*/
 
 
 
